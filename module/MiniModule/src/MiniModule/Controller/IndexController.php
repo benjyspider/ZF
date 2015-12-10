@@ -3,6 +3,9 @@
 namespace MiniModule\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Form\Factory;
+use Zend\Form\Form;
+use Zend\View\Model\ViewModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -50,4 +53,32 @@ class IndexController extends AbstractActionController {
         return array('form' => $form);
     }
 
+    public function formvalidatorAction() {
+        $services = $this->getServiceLocator();
+        $form = $services->get('MiniModule\Form\Authentification');
+//        return array('form' => $form);
+        if ($this->getRequest()->isPost()) {
+            $form->setData($this->getRequest()->getPost());
+            if ($form->isValid()) {
+                $vm = new ViewModel();
+                $vm->setVariables($form->getData());
+                $vm->setTemplate('mini-module/index/formvalidatort');
+                return $vm;
+            }
+        }
+        $form->setAttribute('action', $this->url()->fromRoute('action', array('action' => 'formvalidator')));
+        return array('form' => $form);
+    }
+
+    public function formvalidatortAction() {
+        return array('login' => $_GET['log']);
+    }
+    
+    public function formfilter(){
+        
+    }
+    
+    public function formfiltert(){
+        return array('login' => $_GET['log']);
+    }
 }
