@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/user/public_html/LP/composer.json</file>
-            <file>file:/home/user/public_html/LP/module/MiniModule/Module.php</file>
-            <file>file:/home/user/public_html/LP/config/application.config.php</file>
+            <file>file:/home/user/public_html/LP/module/MiniModule/config/authentification.form.comfig.php</file>
+            <file>file:/home/user/public_html/LP/module/MiniModule/src/MiniModule/Controller/IndexController.php</file>
+            <file>file:/home/user/public_html/LP/module/MiniModule/config/module.config.php</file>
+            <file>file:/home/user/public_html/LP/module/MiniModule/view/mini-module/index/form.phtml</file>
+            <file>file:/home/user/public_html/LP/module/MiniModule/src/MiniModule/Form/AuthentificationFormFactory.php</file>
+            <file>file:/home/user/public_html/LP/module/MiniModule/view/layout/layout.phtml</file>
         </group>
     </open-files>
 </project-private>

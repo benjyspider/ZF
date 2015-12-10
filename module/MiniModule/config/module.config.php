@@ -73,7 +73,7 @@ return array(
             'error' => __DIR__ . '/../view/error.phtml',
             'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
             'mini-module/index/index' => __DIR__ . '/../view/mini-module/index/index.phtml',
-            'mini-module/index/gmaps' => __DIR__ . '/../view/mini-module/index/index.phtml',
+//            'mini-module/index/gmaps' => __DIR__ . '/../view/mini-module/index/index.phtml',
             'mini-module/index/form' => __DIR__ . '/../view/mini-module/index/form.phtml',
             'mini-module/bibliotheque/index' => __DIR__ . '/../view/mini-module/index/index.phtml',
             'mini-module/bibliotheque/isbn' => __DIR__ . '/../view/livre/livre.phtml',
@@ -84,6 +84,14 @@ return array(
         'invokables' => array(
             'MiniModule\Controller\Index' => 'MiniModule\Controller\IndexController',
             'MiniModule\Controller\Bibliotheque' => 'MiniModule\Controller\BibliothequeController',
+        ),
+    ),
+    'service_manager' => array(
+        'factories' => array(
+            'MiniModule\Form\Authentification' => 'MiniModule\Form\AuthentificationFormFactory',
+        ),
+        'services' => array(
+            'config_authentification_form' => include __DIR__ . '/authentification.form.config.php',
         ),
     ),
 );
