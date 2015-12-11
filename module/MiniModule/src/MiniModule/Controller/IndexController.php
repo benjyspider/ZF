@@ -74,11 +74,28 @@ class IndexController extends AbstractActionController {
         return array('login' => $_GET['log']);
     }
     
-    public function formfilter(){
-        
+    public function formfilterAction(){
+        $services = $this->getServiceLocator();
+        $form = $services->get('MiniModule\Form\Authentification');
+//        return array('form' => $form);
+        if ($this->getRequest()->isPost()) {
+            $form->setData($this->getRequest()->getPost());
+            if ($form->isValid()) {
+                $vm = new ViewModel();
+                $vm->setVariables($form->getData());
+                $vm->setTemplate('mini-module/index/formfiltert');
+                return $vm;
+            }
+        }
+        $form->setAttribute('action', $this->url()->fromRoute('action', array('action' => 'formvalidator')));
+        return array('form' => $form);
     }
     
-    public function formfiltert(){
+    public function formfiltertAction(){
         return array('login' => $_GET['log']);
     }
+    
+    
+//        $filter = new Zend\I18n\Validator\Alpha();
+//        $filterC->filter($filter);
 }
