@@ -22,10 +22,11 @@ return array(
             'action' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/[:action]',
+                    'route' => '/:action',
                     'constraints' => array(),
                     'defaults' => array(
-                        'controller' => 'MiniModule\Controller\Index'
+                        'controller' => 'MiniModule\Controller\Index',
+                        'action' => 'index'
                     ),
                 ),
             ),
@@ -71,7 +72,10 @@ return array(
         'template_map' => array(
             '404' => __DIR__ . '/../view/404.phtml',
             'error' => __DIR__ . '/../view/error.phtml',
+            'errorlog' => __DIR__ . '/../view/errorlog.phtml',
             'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/form-auth' => __DIR__ . '/../view/layout/formAuth.phtml',
+            'layout/info-auth' => __DIR__ . '/../view/layout/infoAuth.phtml',
             'mini-module/index/index' => __DIR__ . '/../view/mini-module/index/index.phtml',
 //            'mini-module/index/gmaps' => __DIR__ . '/../view/mini-module/index/index.phtml',
             'mini-module/index/form' => __DIR__ . '/../view/mini-module/index/form.phtml',
@@ -82,7 +86,10 @@ return array(
             'mini-module/bibliotheque/index' => __DIR__ . '/../view/mini-module/index/index.phtml',
             'mini-module/bibliotheque/isbn' => __DIR__ . '/../view/livre/livre.phtml',
             'mini-module/bibliotheque/auteur' => __DIR__ . '/../view/livre/livre.phtml',
+            'layout/form-auth' => __DIR__ . '/../view/layout/formAuth.phtml',
+            'layout/info-auth' => __DIR__ . '/../view/layout/infoAuth.phtml',
         ),
+        'template_path_stack' => array(__DIR__ . '/../view/',),
     ),
     'controllers' => array(
         'invokables' => array(
@@ -93,9 +100,14 @@ return array(
     'service_manager' => array(
         'factories' => array(
             'MiniModule\Form\Authentification' => 'MiniModule\Form\AuthentificationFormFactory',
+            'MiniModule\Form\NewUser' => 'MiniModule\Form\NewUserFormFactory',
+            'DbAdapterFactory' => 'MiniModule\Services\Factory\DbAdapterFactory',
         ),
         'services' => array(
+            /* ajouter un service de session */
+            'session' => new \Zend\Session\Container('minimodule'),
             'config_authentification_form' => include __DIR__ . '/authentification.form.config.php',
+            'mini-module\form\config' => include __DIR__ . '/form.config.php',
         ),
     ),
 );

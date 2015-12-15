@@ -1,0 +1,92 @@
+<?php
+// on customise le formulaire pour l'affichage
+$form = $this->form;
+$auth = $form->get('login');
+$auth->setAttribute( 'class', 'form-control');
+$pass = $form->get('password');
+$pass->setAttribute( 'class', 'form-control');
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-success btn-xs');
+
+$form->setAttributes( array(
+    'action' => $this->url('action', array('action' => 'form' )),
+    'class' => 'navbar-form navbar-right',
+    )
+);
+
+$form->prepare();
+
+// on affiche
+echo '<li>';
+echo $this->form()->openTag($form);
+echo '<div class="form-group">';
+echo "Login: ";
+echo $this->formText($auth);
+echo "   ";
+echo "Mot de passe: ";
+echo $this->formPassword($pass);
+echo '</div>&nbsp;';
+echo $this->formButton()->render( $submit, 'Se Connecter' );
+echo $this->form()->closeTag();
+echo '</li>';
+
+
+$this->inlineScript()->captureStart();
+echo <<<JS
+
+var traiteSubmit = function() {
+    $.ajax({
+        url: '{$this->url('action', array('action' => 'inscription' ))}',
+        method: 'POST',
+        dataType: 'html',
+        data: $(this).serialize(),
+        statusCode: {
+            205: function(data, xhr, request) {
+                var url = request.getResponseHeader('Location');
+                window.location.href = url;
+            },
+            200: function(dataRecu) {
+                $('.modal-content').replaceWith(dataRecu);
+                $('#{$this->newUserForm->getAttribute('id')}').on('submit', traiteSubmit )
+            }
+        }
+    });
+    return false;
+};
+
+$(document).ready( function() {
+    $('#{$this->newUserForm->getAttribute('id')}').on('submit', traiteSubmit );
+});
+JS;
+$this->inlineScript()->captureEnd();
+?>
+<li>
+    &nbsp;<button type="button" class="btn btn-primary btn-xs navbar-btn" data-toggle="modal" data-target="#inscriptionModal">S'inscrire</span></button>
+</li>
+
+<?php
+$form = $this->newUserForm;
+$form->prepare();
+?>
+<!-- Modal -->
+<div class="modal fade" id="inscriptionModal" tabindex="-1" role="dialog" aria-labelledby="inscriptionModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <?php echo $this->form()->openTag($form); ?>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="inscriptionModalLabel">Créez votre compte</h4>
+            </div>
+            <div class="modal-body">
+                Votre login : <?php echo $this->formText( $form->get('login') ); ?><br/>
+                Votre mot de passe : <?php echo $this->formText( $form->get('password') ); ?><br/>
+                <?php echo $this->formCaptcha( $form->get('newUserCaptcha')); ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">s'inscrire</button>
+            </div>
+            <?php echo $this->form()->closeTag(); ?>
+        </div>
+    </div>
+</div>

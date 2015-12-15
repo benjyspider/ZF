@@ -1,6 +1,9 @@
 <?php
 
-namespace MiniModule\Element;
+namespace MiniModule\Form\Element;
+
+use Zend\Form\Element;
+use Zend\InputFilter\InputProviderInterface;
 
 class Login extends \Zend\Form\Element\Text implements \Zend\InputFilter\InputProviderInterface {
 

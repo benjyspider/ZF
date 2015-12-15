@@ -1,8 +1,40 @@
-<html>
-    <body>
-        Message: 
-        <?php
-            echo $this->content;
-        ?>
-    </body>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/css/global.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <?php echo $this->formulaireAuth; ?>
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+
+    </nav>
+
+    <?php echo $this->content;?>
+
+</div>
+<script src="/jquery/jquery.min.js"></script>
+<script src="/dist/js/bootstrap.min.js"></script>
+<?php echo $this->inlineScript();?>
+
+</body>
 </html>

@@ -12,6 +12,12 @@
         "zendframework/zend-I18n": "2.*",
         "zendframework/zend-console": "2.*",
         "zendframework/zendframework": "*",
-        "gowsram/g-maps": "dev-master"
+        "gowsram/g-maps": "dev-master",
+        "zendframework/zend-config": "2.*",
+        "zendframework/zend-session": "2.*",
+        "zendframework/zend-captcha": "2.*",
+        "components/bootstrap": "2.*",
+        "components/jquery": "2.*",
+        "twbs/bootstrap": "dev-master"
     }
 }
